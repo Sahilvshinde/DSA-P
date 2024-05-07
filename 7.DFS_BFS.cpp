@@ -1,6 +1,8 @@
 #include<iostream>
 #include<string.h>
 #include<stdlib.h>
+
+
 using namespace std;
 struct vertex 
 {
@@ -8,15 +10,21 @@ struct vertex
 	int visit;
 	struct vertex *next;
 };
+
 struct vertex * lmark[20];
+
 struct vertex *newnode(char nm[15])
 {   struct vertex *p;
+
 	p=(struct vertex*)malloc(sizeof(struct vertex));
 	strcpy(p->name,nm);
 	p->visit=0;
 	p->next=NULL;
-	return(p);	
+
+	return(p);
+	
 }
+
 int search(char x[15],int n)
 {
 	int i;
@@ -26,6 +34,8 @@ int search(char x[15],int n)
 		return i;
 	}
 }
+
+
 void DFS(char s[15],int n)
 {
 struct vertex *temp;
@@ -34,7 +44,7 @@ int top=-1,i;
 cout<<endl<<"DFS of given graph is"<<endl;
 top++;
 
-strcpy(stack[top],s); 
+strcpy(stack[top],s);  
 	while(top!=-1)
 	{
 		strcpy(x,stack[top]);
@@ -57,9 +67,14 @@ strcpy(stack[top],s);
 				strcpy(stack[top],temp->name);
 		    }
 			temp=temp->next;
-		}			
-	}		
+		}	
+		
+	}
+	
+		
 }
+ 
+
 void BFS(char s[15],int n)
 {
 struct vertex *temp;
@@ -70,7 +85,9 @@ if(rear==-1)
 front++;
 rear++;
 
+
 strcpy(Queue[rear],s);
+
 	while(rear!=-1)
 	{
 		strcpy(x,Queue[front]);
@@ -94,12 +111,17 @@ strcpy(Queue[rear],s);
 				if(rear==0)
 				front=0;
 				rear++;
-				strcpy(Queue[rear],temp->name);	
+				strcpy(Queue[rear],temp->name);
+				
 			}
 			temp=temp->next;
-		}		
-	}			
+		}	
+		
+	}
+	
+		
 }
+
 int main()
 {
 int n,e,i,i1,i2,choice;
@@ -109,10 +131,13 @@ cout<<"Enter number of vertices"<<endl;
 cin>>n;
 for(i=0;i<n;i++)
 {
+
 	cout<<"Enter name of vertex" <<i+1<<endl;
 	cin>>nm;
 	p=newnode(nm);
-    lmark[i]=p;	
+
+    lmark[i]=p;
+	
 } 
 cout<<"Enter number of edges"<<endl;
 cin>>e; 
@@ -121,7 +146,9 @@ for(i=0;i<e;i++)
 	cout<<"Enter edge"<<i+1<<endl;
 	cin>>v1>>v2;
 	i1=search(v1,n);
-	i2=search(v2,n);
+	
+	i2=search(v2,e);
+	
 	p=newnode(v2);
 	q=newnode(v1);
 	temp=lmark[i1];
@@ -129,18 +156,22 @@ for(i=0;i<e;i++)
 	{
 		temp=temp->next;
 	}
-	temp->next=p;	
+	temp->next=p;
+	
 	temp=lmark[i2];
 	while(temp->next!=NULL)
 	{
 		temp=temp->next;
 	}
 	temp->next=q;
+	
 }
+
 cout<<endl;
 cout<<"Adjacency list is"<<endl;
  for(i=0;i<n;i++)
  {
+ 
 	temp=lmark[i];
 	while(temp!=NULL)
 	{   cout<<temp->name<<"->";
@@ -148,11 +179,14 @@ cout<<"Adjacency list is"<<endl;
 	}
 	cout<<endl;
 }
+
+
 cout<<endl<<"Enter starting node"<<endl;
 cin>>s;
 cout<<endl;
 while(1)
 	{
+
 	cout<<"\nMenu:\n 1.DFS\n2.BFS\n3.Exit\n";
 	cout<<"Enter your choice\n";
 	cin>>choice;
@@ -176,5 +210,8 @@ while(1)
 		case 3:
 		exit(0);
 	}
+
 	}
 }
+
+
