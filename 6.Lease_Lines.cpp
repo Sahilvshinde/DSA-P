@@ -10,6 +10,8 @@ public:
 	void creategraph();
 	void primfun(int);
 };
+
+
 void prims::creategraph()
 {
   	int v1,v2,i,j,wt;
@@ -17,6 +19,7 @@ void prims::creategraph()
    	cin>>vertex;
    	cout<<"\n\t\t Enter the no of lease lines:::";
    	cin>>edge;
+   
   	for(i=0;i<vertex;i++)
   		for(j=0;j<vertex;j++)
      		 {
@@ -24,64 +27,95 @@ void prims::creategraph()
 				 cost[i][j]=0;
 				 else
 				  cost[i][j]=inf;
-			}	
+			}
+	
    	for(i=0;i<edge;i++)
    	{
 		cout<<"\n\t\t Enter the lease lines (edge) and Their costs(v1,v2,wt)::"; 
 		cin>>v1>>v2>>wt;
 		cost[v1][v2]=cost[v2][v1]=wt;
    	}
+   	
 }
 
 void prims::primfun(int s)
 {
   int min,i,j,n=1,visited[10],dist[10],from[10],nextnode,mstcost=0;
+
+
   for(i=0;i<vertex;i++)
   {
    visited[i]=0;
    dist[i]=inf;
    from[i]=s;
   }
-  visited[s]=1;	
+  
+  
+ visited[s]=1;
+
+ 
+	
 	for(i=0;i<vertex;i++)
 	{
 		if(visited[i]==0&&cost[s][i]<dist[i])
 		{
-			dist[i]=cost[s][i];	
-		}	
+			dist[i]=cost[s][i];
+			
+		}
+		
+		
 	}
-   while(n<vertex)
+	
+	
+   while(n<vertex) 
    {
 	min=inf;
+	
+	
 	for(i=0;i<vertex;i++)
 	{
 		if(visited[i]==0&&dist[i]<min)
 		{
 			min=dist[i];
-			nextnode=i;	
+			nextnode=i;
+			
 		}
 	}
+	
+
 	cout<<endl<<from[nextnode]<<"  "<<nextnode<<endl;
 	n++;
 	visited[nextnode]=1;
-	mstcost+=dist[nextnode];  
+	mstcost+=dist[nextnode];	
+	
+    
+
 	for(i=0;i<vertex;i++)
 	{
 		if(visited[i]==0 && dist[i]>cost[nextnode][i])
 		{
 		dist[i]=cost[i][nextnode];
 		from[i]=nextnode;
-		}		
-	}	
-} 
-cout<<"\n\tCost of minimun spanning tree is::"<<mstcost<<endl;
+		}
+			
+	}
+	
+	
 }
+ 
+	
+   cout<<"\n\tCost of minimun spanning tree is::"<<mstcost<<endl;
+
+}
+
 int main()
 {
    prims s1;
+   
    int ch;
 	while(1)
 	{
+
 		 cout<<"\n 1.Creategraph (Adjacency matrix form) \n 2.Prims Algorithm \n 3.Exit.\n";
 		 cout<<"\n\nEnter Ur Choice= ";
 		 cin>>ch;
@@ -90,7 +124,7 @@ int main()
 
 		 case 1:
 			 s1.creategraph();
-				 break;
+			break;
 
 		 case 2:
 			    int start;
@@ -100,9 +134,9 @@ int main()
 			    s1.primfun(start);
 				 break;
 
-		 case 3:exit(0);
+		 case 3:
+		 		exit(0);
 		 }
 	 }
    return 0;
 }
-
